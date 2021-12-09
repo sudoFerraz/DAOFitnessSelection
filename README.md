@@ -1,4 +1,4 @@
-#Tasks to do
+# Tasks to do
 
  - Enter pension system
    - Send wETH to the auction house to pool tokens
@@ -13,3 +13,11 @@
 
 
 Compounds on the last amount you wrote to incentivize continuous contributions
+
+
+Farm:
+- Stake Tokens
+- Unstake Tokens
+- Issue Tokens
+- Add Allowed Tokens
+- Get ETH Value
