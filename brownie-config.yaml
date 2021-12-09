@@ -1,5 +1,5 @@
 dependencies:
-  - OpenZeppelin/openzeppelin-contracts@4.0.0
+  - OpenZeppelin/openzeppelin-contracts@4.3.2
   - OpenZeppelin/openzeppelin-contracts-upgradeable@4.3.2
   - smartcontractkit/chainlink-brownie-contracts@1.2.0
   - smartcontractkit/chainlink-brownie-contracts@1.1.1
@@ -15,7 +15,7 @@ compiler:
   solc:
     version: null
     remappings:
-      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.0.0'
+      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.3.2'
       - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.2.0'
       - '@openzeppelinUpgrades=OpenZeppelin/openzeppelin-contracts-upgradeable@4.3.2'
       - '@chainlinkOld=smartcontractkit/chainlink-brownie-contracts@1.1.1'
