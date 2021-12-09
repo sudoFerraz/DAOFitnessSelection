@@ -3,6 +3,8 @@
 RetirementDAO is a project to exemplify the use of the biased roulette selection
 algorithm (also known as [Fitness proportionate selection](https://en.wikipedia.org/wiki/Fitness_proportionate_selection)used in genetic algorithms) in the context of a web3 protocol;
 
+It was created for the GlobalDAOHackaton 2021
+
 The roulette selection is used on the action of picking a random winner that 
 would be granted access to the DAO, using the participants staked tokens as a weight
 of fitness;
