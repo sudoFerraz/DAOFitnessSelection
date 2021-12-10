@@ -19,7 +19,8 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 	bytes32 public keyHash;
 	uint256 public fee;
 	TiredToken public tiredToken;
-	address[] participants;
+	uint256 totalParticipants;
+	mapping (uint => address) participants;
 	mapping(address => Ticket) public participantToAmount;
 	event UserBurnedTokens(address burnerUser, uint256 burnedAmount);
 	enum ROUND_STATE {
@@ -47,7 +48,8 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 	function addUserToParticipants(address _user, uint256 _burnedAmount) internal {
 		require(_burnedAmount > 0);
 		require(!participantToAmount[_user].valid);
-		participants.push(payable(msg.sender));
+		totalParticipants++;
+		participants[totalParticipants] = _user;
 		participantToAmount[_user] = Ticket(true, _burnedAmount);
 	}
 
@@ -73,11 +75,66 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 	function fulfillRandomness(bytes32 _requestId, uint256 _randomNumber) internal override {
 		require(roundState == ROUND_STATE.CALCULATING_WINNER, "You aren't there yet!");
 		require(_randomNumber > 0, "random not found");
+		address winner = calculateSelectedParticipant(_randomNumber);
 
 	}
 
-	function calculateSelectedParticipant() public view returns(address) {
+	function calculateSelectedParticipant(uint256 _randomNumber)
+	public returns(address) {
+		uint256[] memory _arrayOfParticipantFitness = transformParticipantsWeights();
+		address selectedParticipant = findParticipantSelected(_randomNumber, _arrayOfParticipantFitness);
 
+	}
+
+	function transformParticipantsWeights() public returns (uint256[] memory){
+		uint256 _totalStaked = sumParticipantWeights();
+		uint256[] memory _normalizedFitness = calculateParticipantFitness(_totalStaked);
+		return _normalizedFitness;
+	}
+
+	function findParticipantSelected(uint256 _randomNumber, uint256[] memory _normalizedFitness)
+	public returns(address) {
+		
+		for (
+			uint256 _participantIndex = 0;
+			_participantIndex < totalParticipants;
+			_participantIndex++
+		) {
+
+		}
+	}
+
+	function calculateParticipantFitness(uint256 stakedSum) public returns (uint256[] memory) {
+		uint256[] memory _normalizedFitness;
+		uint256 _currentUserFitness;
+		address _currentUser = payable(msg.sender);
+		for (
+			uint256 _participantIndex = 0;
+			_participantIndex < totalParticipants;
+			_participantIndex++
+		) {
+				_currentUser = participants[_participantIndex];
+				_currentUserFitness = participantToAmount[_currentUser].ticketSize;
+				_normalizedFitness[_participantIndex] = (_currentUserFitness / stakedSum);
+				if (_participantIndex != 0) {
+					_normalizedFitness[_participantIndex] = _normalizedFitness[_participantIndex] + _normalizedFitness[_participantIndex - 1];
+				}
+			}
+		return _normalizedFitness;
+	}
+
+	function sumParticipantWeights() public returns (uint256) {
+		uint256 _stakedSum = 0;
+		address _currentUser = payable(msg.sender);
+		for (
+			uint256 _participantIndex = 0;
+			_participantIndex < totalParticipants;
+			_participantIndex++
+		) {
+				_currentUser = participants[_participantIndex];
+				_stakedSum = _stakedSum + participantToAmount[_currentUser].ticketSize;
+			}
+			return _stakedSum;
 	}
 
 
