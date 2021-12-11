@@ -77,8 +77,8 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 		require(roundState == ROUND_STATE.CALCULATING_WINNER, "You aren't there yet!");
 		require(_randomNumber > 0, "random not found");
 		address _selectedParticipant = calculateSelectedParticipant(_randomNumber);
-		recentWinner = _selectedParticipant;
-		recentWinner.transfer(address(this.balance));
+		recentWinner = payable(_selectedParticipant);
+		recentWinner.transfer(address(this).balance);
 	}
 
 	function calculateSelectedParticipant(uint256 _randomNumber)
