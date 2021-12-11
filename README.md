@@ -16,7 +16,7 @@ fitness;
 We retrieve the random number from ChainlinkVRF https://docs.chain.link/docs/chainlink-vrf/,
 which is then transformed to fit into the subset between 0 and 1. Improving the
 normalization of the random number transformation is a hard problem on-chain,
-as we can't ensure a normal ditribution when dividing by 10**18 with solidity truncated
+as we can't ensure a uniform distribution when dividing by 10**18 with solidity truncated
 divisions.
 
 ### Possible applications
