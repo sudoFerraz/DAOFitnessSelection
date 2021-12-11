@@ -7,7 +7,7 @@ import {
 	TiredToken
 } from './TiredToken.sol';
 import "@openzeppelin/contracts/access/Ownable.sol";
-
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 
@@ -20,6 +20,7 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 	uint256 public fee;
 	TiredToken public tiredToken;
 	uint256 totalParticipants;
+	address payable public recentWinner;
 	mapping (uint => address) participants;
 	mapping(address => Ticket) public participantToAmount;
 	event UserBurnedTokens(address burnerUser, uint256 burnedAmount);
@@ -75,8 +76,9 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 	function fulfillRandomness(bytes32 _requestId, uint256 _randomNumber) internal override {
 		require(roundState == ROUND_STATE.CALCULATING_WINNER, "You aren't there yet!");
 		require(_randomNumber > 0, "random not found");
-		address winner = calculateSelectedParticipant(_randomNumber);
-
+		address _selectedParticipant = calculateSelectedParticipant(_randomNumber);
+		recentWinner = _selectedParticipant;
+		recentWinner.transfer(address(this.balance));
 	}
 
 	function calculateSelectedParticipant(uint256 _randomNumber)
@@ -94,13 +96,17 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 
 	function findParticipantSelected(uint256 _randomNumber, uint256[] memory _normalizedFitness)
 	public returns(address) {
-		
+		uint256 _normalizedRandom = _randomNumber / (10 ** 18);
 		for (
 			uint256 _participantIndex = 0;
 			_participantIndex < totalParticipants;
 			_participantIndex++
 		) {
-
+				if (_normalizedFitness[_participantIndex] > _normalizedRandom) {
+					if (_normalizedFitness[_participantIndex - 1] <= _normalizedRandom) {
+						return participants[_participantIndex];
+					}
+				}
 		}
 	}
 
@@ -115,7 +121,7 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 		) {
 				_currentUser = participants[_participantIndex];
 				_currentUserFitness = participantToAmount[_currentUser].ticketSize;
-				_normalizedFitness[_participantIndex] = (_currentUserFitness / stakedSum);
+				_normalizedFitness[_participantIndex] = ((_currentUserFitness * 10**18 )/ stakedSum);
 				if (_participantIndex != 0) {
 					_normalizedFitness[_participantIndex] = _normalizedFitness[_participantIndex] + _normalizedFitness[_participantIndex - 1];
 				}
