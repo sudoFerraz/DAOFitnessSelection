@@ -37,7 +37,7 @@ contract_to_mock = {
     "link_token": LinkToken,
     "vrf_coordinator": VRFCoordinatorMock,
     "retiredNft": RetiredNFT,
-    "tiredToken": TiredToken
+    "tiredToken": TiredToken,
 }
 
 

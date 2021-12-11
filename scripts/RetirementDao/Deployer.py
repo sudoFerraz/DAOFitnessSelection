@@ -50,6 +50,7 @@ def deployPensionGranter():
     account = get_account()
     print(account)
     retirementPensionGranter = RetirementPensionGranter.deploy(
+        get_contract("retiredNft"),
         get_contract("vrf_coordinator"),
         get_contract("link_token"),
         get_contract("tiredToken"),
