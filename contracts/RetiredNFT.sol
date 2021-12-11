@@ -40,7 +40,6 @@ contract RetiredNFT is ERC721, VRFConsumerBase {
 		TicketCategory category = TicketCategory(randomNumber % 2);
 		uint256 newTokenId = tokenCounter;
 		tokenIdToCategory[newTokenId] = category;
-		// emit breedAssigned(newTokenId, breed);
 		emit categoryAssigned(newTokenId, category);
 		address owner = requestIdToSender[requestId];
 		_safeMint(owner, newTokenId);
