@@ -52,7 +52,7 @@ over-time and incentivizing participation.
 
   Contributions by itself could be considered as PRs in a github repo like gitvern
   is doing (https://github.com/gitvern/) or as a ticket bought to a concert or 
-  championship.
+  championship or a POAP
 
 
 
