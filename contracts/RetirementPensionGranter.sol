@@ -8,6 +8,9 @@ import {
 } from './TiredToken.sol';
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import {
+	RetiredNFT
+} from './RetiredNFT.sol';
 
 contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 
@@ -16,6 +19,7 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 		uint256 ticketSize;
 	}
 
+	RetiredNFT public retiredNft;
 	bytes32 public keyHash;
 	uint256 public fee;
 	TiredToken public tiredToken;
@@ -33,6 +37,7 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 	event RequestRandomness(bytes32 requestId);
 
 	constructor(
+		RetiredNFT _retiredNft,
 		address _VRFCoordinator,
 		address _linkToken,
 		TiredToken _tiredToken,
@@ -44,6 +49,7 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 		keyHash = _keyHash;
 		fee = _fee;
 		tiredToken = _tiredToken;
+		retiredNft = _retiredNft;
 	}
 
 	function addUserToParticipants(address _user, uint256 _burnedAmount) internal {
@@ -78,14 +84,14 @@ contract RetirementPensionGranter is VRFConsumerBase, Ownable {
 		require(_randomNumber > 0, "random not found");
 		address _selectedParticipant = calculateSelectedParticipant(_randomNumber);
 		recentWinner = payable(_selectedParticipant);
-		recentWinner.transfer(address(this).balance);
+		retiredNft.createRetiredNFT(_selectedParticipant);
 	}
 
 	function calculateSelectedParticipant(uint256 _randomNumber)
 	public returns(address) {
 		uint256[] memory _arrayOfParticipantFitness = transformParticipantsWeights();
 		address selectedParticipant = findParticipantSelected(_randomNumber, _arrayOfParticipantFitness);
-
+		return selectedParticipant;
 	}
 
 	function transformParticipantsWeights() public returns (uint256[] memory){
