@@ -44,7 +44,7 @@ After a participant stakes ETH in the protocol, on every new draw round, it's
 weight ('fitness') is compounded by a fixed factor, increasing it's fitness
 over-time and incentivizing participation.
 
-Token Gated Daos:
+##### Token Gated Daos:
   
   Could incentivise the contribution into the DAO, by minting ERC20 tokens to
   contributors that stake such tokens and are counted as an equivalent of fitness
@@ -64,11 +64,12 @@ Token Gated Daos:
    - [x] Send burneable ERC20 to the auction house to pool tokens
    - [x] Burn tokens sent to be staked
    - [ ] Auction house needs to buy tokens from aave pool
-   - [x] Auction house pools the tokens inside the auction house for person who burned the ERC20 
+   - [x] Auction house creates a ticket inside the auction house for person who burned the ERC20 
    - [ ] Auction house creates a new draw round every 24 hours
    - [x] Auction house calculates selectedParticipant based on the genetic algorithm and the previous ERC20 sent
    - [x] Auction house mints a new RetiredNFT for selectedParticipant
    - [ ] RetiredNFT owner has the stream from wETH sent to the auction house pooled treasury
+   - [ ] Auction house compounds ticket size created on participation
 
 
 
