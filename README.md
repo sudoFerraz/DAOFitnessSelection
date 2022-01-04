@@ -1,3 +1,8 @@
+## Video Explanation
+
+https://www.youtube.com/watch?v=DFz1Y8BRxhk
+Unfortunately the microphone level came out very low on editing, please put your volume on max to hear something :D 
+
 ## Description
 
 RetirementDAO is a project to exemplify the use of the biased roulette selection
