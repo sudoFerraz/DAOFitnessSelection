@@ -35,7 +35,7 @@ When a participant is selected through the biased roulette selection, he earns
 the right of minting a new NFT(RetiredNFT), which is the gateway token of RetirementDAO,
 who controls the treasury.
 
-The RetirementDAO treasury, redistributes all ETH received into a staking pool in aave,
+The RetirementDAO treasury could then, redistributes all ETH received into a staking pool in aave,
 and share all returns from it equally between RetiredNFT holders through a stream like
 degen_dogs (https://github.com/markcarey/degendogs) did.
 
