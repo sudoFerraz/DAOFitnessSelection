@@ -35,12 +35,12 @@ When a participant is selected through the biased roulette selection, he earns
 the right of minting a new NFT(RetiredNFT), which is the gateway token of RetirementDAO,
 who controls the treasury.
 
-The RetirementDAO treasury could then, redistributes all ETH received into a staking pool in aave,
+The RetirementDAO treasury could then, redistribute all ETH received into a staking pool in aave,
 and share all returns from it equally between RetiredNFT holders through a stream like
 degen_dogs (https://github.com/markcarey/degendogs) did.
 
 With a fitness function being based on how many certain tokens are staked or that
-a person has ownership of, the applications of such selection does not include any
+a person has ownership of, such selection does not include any
 incentives for over-time participantion on a DAO or a Protocol, for this reason,
 one could consider creating a new ERC20 for issuance within the "staking" action,
 which therefore would enable the opportunity of a compound mechanism that would incentivise
@@ -57,7 +57,7 @@ over-time and incentivizing participation.
 
   Contributions by itself could be considered as PRs in a github repo like gitvern
   is doing (https://github.com/gitvern/) or as a ticket bought to a concert or 
-  championship or a POAP
+  championship or a POAP, also worth to mention that it could be CRED from sourceCred protocol
 
 
 
