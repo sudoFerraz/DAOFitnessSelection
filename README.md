@@ -1,7 +1,7 @@
 ## Video Explanation
 
 https://www.youtube.com/watch?v=DFz1Y8BRxhk
-Unfortunately the microphone level came out very low on editing, please put your volume on max to hear something :D 
+Unfortunately the microphone level came out very low on editing, please put your volume on max to hear something :)
 
 ## Description
 
