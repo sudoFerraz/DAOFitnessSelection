@@ -81,6 +81,6 @@ over-time and incentivizing participation.
 Farm:
 - Stake Tokens
 - Unstake Tokens
-- Issue Tokens
+- Issue Tokens.
 - Add Allowed Tokens
 - Get ETH Value.
