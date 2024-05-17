@@ -83,4 +83,4 @@ Farm:
 - Unstake Tokens
 - Issue Tokens
 - Add Allowed Tokens
-- Get ETH Value
+- Get ETH Value.
